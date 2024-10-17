@@ -1,0 +1,152 @@
+/* ---------------------------------------------------------------------- */
+/*  CSS Reset
+/* ---------------------------------------------------------------------- */
+
+/* Box Model
+----------------------------------------------- */
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Typography
+----------------------------------------------- */
+body {
+    font-family: "Rokkitt", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+	/* font-family: Helvetica, Arial, sans-serif; */
+	font-size: 16px;
+	line-height: 1.5;
+	color: #222;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+h2 {
+	font-size: 1.5em;
+}
+
+h3 {
+	font-size: 1.25em;
+}
+
+h4 {
+	font-size: 1em;
+}
+
+h5 {
+	font-size: 0.875em;
+}
+
+h6 {
+	font-size: 0.75em;
+}
+
+/* Links
+----------------------------------------------- */
+a {
+	color: #069;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/* Lists
+----------------------------------------------- */
+ul, ol {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+/* Images
+----------------------------------------------- */
+img {
+	max-width: 100%;
+	height: auto;
+	border: 0;
+}
+
+/* Tables
+----------------------------------------------- */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+th, td {
+	padding: 8px;
+	text-align: left;
+	border: 1px solid #ddd;
+}
+
+/* Misc
+----------------------------------------------- */
+article, aside, details, figcaption, figure,
+footer, header, main, nav, section, summary {
+	display: block;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Custom Styles
+/* ---------------------------------------------------------------------- */
+
+#my-form {
+    text-align: center;
+    font-size: 32px;
+    line-height: 1;
+}
+
+#my-form p {
+    margin: 0 0 8px 0;
+}
+
+#my-form p input {
+    height: 100%;
+    /* padding: 0; */
+    margin: 0;
+    border: none;
+    border-bottom: 2px dashed #ccddcc;
+    background: none;
+    text-align: center;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 32px;
+    line-height: 1;
+    color: #226622;
+}
+
+#my-form p input:focus {
+    outline: none;
+    background-color: #eeffee;
+}
+
+#my-form p input::placeholder {
+    color: #ccddcc;
+}
+
+#f-amount,#f-total,#f-monthly {
+    width: 280px;
+}
+
+#f-tenor {
+    width: 100px;
+}
+
+#f-interest {
+    width: 120px;
+}
