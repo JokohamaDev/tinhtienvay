@@ -18,20 +18,24 @@
         <![endif]-->
         <section id="my-form">
             <p>Tôi dự định vay</p>
-            <p>số tiền <input type="text" id="f-amount" placeholder="100,000,000" onfocus="use_number(this)" onblur="use_text(this)"> ₫</p>          
-            <p>với lãi suất là <input type="text" id="f-interest" min="1" max="100" step="0.1" placeholder="7.0" onfocus="use_number(this)" oninput="checkMaxInterest(this)" onblur="formatDecimal(this)"> %/năm</p>
-            <p>trong thời gian <input type="text" id="f-tenor" min="1" max="360" placeholder="12" onfocus="use_number(this)" oninput="checkMaxTenor(this)" onblur="use_text(this)"> tháng</p>
+            <p>số tiền <input type="text" id="f-amount" placeholder="100,000,000" required onfocus="use_number(this)" onblur="use_text(this)"> ₫</p>          
+            <p>với lãi suất là <input type="text" id="f-interest" min="1" max="100" step="0.1" placeholder="7.0" required onfocus="use_number(this)" oninput="checkMaxInterest(this)" onblur="formatDecimal(this)"> %/năm</p>
+            <p>trong thời gian <input type="text" id="f-tenor" min="1" max="360" placeholder="12" required onfocus="use_number(this)" oninput="checkMaxTenor(this)" onblur="use_text(this)"> tháng</p>
             <input type="button" value="Tính toán" onclick="calculate()">
 
-            <p>Mỗi tháng tôi phải trả <input type="text" id="f-monthly" placeholder="0" disabled onblur="use_text(this)"> ₫</p>
-            <p>và tổng số tiền phải trả là <input type="text" id="f-total1" placeholder="0" disabled onblur="use_text(this)"> ₫</p>
+        </section>
 
-            <p>và tổng số tiền phải trả là <input type="text" id="f-total2" placeholder="0" disabled onblur="use_text(this)"> ₫</p>
-            <p>và tổng số tiền phải trả là <input type="text" id="f-first-month" placeholder="0" disabled onblur="use_text(this)"> ₫</p>
-            <p>và tổng số tiền phải trả là <input type="text" id="f-last-month" placeholder="0" disabled onblur="use_text(this)"> ₫</p>
+        <section id="my-result" class="container">
+            <div class="box">
+                <p>Tổng số tiền phải trả là <input type="text" id="f-total1" placeholder="0" disabled onblur="use_text(this)"> ₫</p>
+                <p>trong đó mỗi tháng là <input type="text" id="f-monthly" placeholder="0" disabled onblur="use_text(this)"> ₫</p>
+            </div>
 
-
-
+            <div class="box">
+                <p>Tổng số tiền phải trả là <input type="text" id="f-total2" placeholder="0" disabled onblur="use_text(this)"> ₫</p>
+                <p>tháng đầu tiên là <input type="text" id="f-first-month" placeholder="0" disabled onblur="use_text(this)"> ₫</p>
+                <p>và tháng cuối cùng là <input type="text" id="f-last-month" placeholder="0" disabled onblur="use_text(this)"> ₫</p>
+            </div>
         </section>
         <script src="js/main.js"></script>
     </body>

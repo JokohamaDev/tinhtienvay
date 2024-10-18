@@ -1,3 +1,14 @@
+
+/* CSS HSL */
+:root {
+    --white: hsl(0, 0%, 100%);
+	--vista-blue: hsl(221, 43%, 69%);
+	--glaucous: hsl(224, 38%, 55%);
+	--yinmn-blue: hsl(227, 21%, 36%);
+	--nyanza: hsl(90, 61%, 91%);
+	--hookers-green: hsl(152, 21%, 36%);
+}
+
 /* ---------------------------------------------------------------------- */
 /*  CSS Reset
 /* ---------------------------------------------------------------------- */
@@ -103,13 +114,17 @@ footer, header, main, nav, section, summary {
 /*  Custom Styles
 /* ---------------------------------------------------------------------- */
 
-#my-form {
+body {
+    background-color: var(--nyanza);
+}
+
+#my-form,#my-result {
     text-align: center;
     font-size: 32px;
     line-height: 1;
 }
 
-#my-form p {
+#my-form p,#my-result p {
     margin: 0 0 8px 0;
 }
 
@@ -149,4 +164,24 @@ footer, header, main, nav, section, summary {
 
 #f-interest {
     width: 120px;
+}
+
+.input-error {
+    border-bottom: 2px dashed #ff9999 !important;
+}
+
+.input-error::placeholder {
+    color: #ff9999 !important;
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.box {
+    background-color: var(--white);
+    flex: 1;
+    margin: 0 8px;
 }
