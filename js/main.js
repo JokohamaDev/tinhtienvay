@@ -1,43 +1,43 @@
 
 const inputs = document.querySelectorAll("#my-form input");
-    document.querySelector("#my-form input[type=button]").addEventListener("click", () => {
-        inputs.forEach(input => {
-            if (input.value.trim() === "") {
-                input.classList.add("input-error");
-            }
-        })
+document.querySelector("#my-form input[type=button]").addEventListener("click", () => {
+    inputs.forEach(input => {
+        if (input.value.trim() === "" || input.value === "0") {
+            input.classList.add("input-error");
+        }
     })
+})
 
 function use_number(node) {
     node.classList.remove("input-error");
     var empty_val = false;
     const value = node.value;
     if (node.value == '')
-      empty_val = true;
+        empty_val = true;
     node.type = 'number';
     if (!empty_val)
-      node.value = Number(value.replace(/,/g, '')); // or equivalent per locale
+        node.value = Number(value.replace(/,/g, '')); // or equivalent per locale
 }
-  
+
 function use_text(node) {
     var empty_val = false;
     const value = Number(node.value);
     if (node.value == '')
-      empty_val = true;
+        empty_val = true;
     node.type = 'text';
     if (!empty_val)
-      node.value = value.toLocaleString('en');  // or other formatting
+        node.value = value.toLocaleString('en');  // or other formatting
 }
 
 function checkMaxTenor(input) {
     if (input.value > 360) {
-      input.value = 360;
+        input.value = 360;
     }
 }
 function checkMaxInterest(input) {
     input.type = 'number';
     if (input.value > 100) {
-      input.value = 100;
+        input.value = 100;
     }
 }
 
@@ -106,7 +106,7 @@ function calculate() {
         let total_decreasing = 0;
         let outstanding_balance = amount;
         for (let i = 0; i < tenor; i++) {
-            let payment_decreasing = amount/tenor + outstanding_balance * interest/1200;
+            let payment_decreasing = amount / tenor + outstanding_balance * interest / 1200;
             total_decreasing += payment_decreasing;
             outstanding_balance -= payment_decreasing;
             if (i == 0) {
@@ -114,7 +114,7 @@ function calculate() {
                 let rounded_first_month_decreasing = Math.round(first_month_decreasing) || 0;
                 firstMonthElement.value = rounded_first_month_decreasing.toLocaleString('en');
             }
-            if (i == tenor-1) {
+            if (i == tenor - 1) {
                 let last_month_decreasing = payment_decreasing;
                 let rounded_last_month_decreasing = Math.round(last_month_decreasing) || 0;
                 lastMonthElement.value = rounded_last_month_decreasing.toLocaleString('en');
@@ -130,6 +130,65 @@ function calculate() {
         // let last_month_decreasing = outstanding_balance * interest_rate;
         // let rounded_last_month_decreasing = Math.round(last_month_decreasing) || 0;
         // lastMonthElement.value += '\n' + rounded_last_month_decreasing.toLocaleString('en');
+
+        // chart
+        const ctx = document.getElementById('myChart').getContext('2d');
+        let data1 = Array(tenor).fill(Math.round(monthly_payment) || 0);
+        let data2 = [];
+
+        let outstanding_balance2 = amount;
+        for (let i = 0; i < tenor; i++) {
+            let payment_decreasing = amount / tenor + outstanding_balance2 * interest / 1200;
+            let rounded_payment_decreasing = Math.round(payment_decreasing) || 0;
+            data2.push(rounded_payment_decreasing);
+            outstanding_balance2 -= payment_decreasing;
+        }
+        let chartStatus = Chart.getChart("myChart");
+        if (chartStatus != undefined) {
+            chartStatus.destroy();
+        }
+        let myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [...Array(tenor).keys()].map(i => i + 1),
+                datasets: [
+                    {
+                        label: 'Trả lãi cố định theo dư nợ ban đầu',
+                        data: data1,
+                        borderColor: 'hsl(200, 42%, 69%)',
+                        backgroundColor: 'hsl(200, 42%, 69%)',
+                    },
+                    {
+                        label: 'Trả lãi dựa trên dư nợ giảm dần',
+                        data: data2,
+                        borderColor: 'hsl(270, 42%, 69%)',
+                        backgroundColor: 'hsl(270, 42%, 69%)',
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Thời gian (tháng thứ n)',
+                        }
+                    }
+                }
+            },
+            plugins: [{
+                id: 'removePlaceholder',
+                beforeRender: function (chart) {
+                    document.getElementById('chart_placeholder').style.display = 'none';
+                    document.getElementById('myChart').style.display = 'block';
+                }
+            }]
+        });
 
     } catch (error) {
         console.error("Error calculating payment:", error.message);
