@@ -147,6 +147,12 @@ header {
     align-items: center;
 }
 
+#logo {
+    width: 222px;
+    height: 30px;
+    fill: var(--yinmn-blue);
+}
+
 header h1 {
     font-family: "Rokkitt", serif;
     font-optical-sizing: auto;
@@ -164,9 +170,20 @@ header button {
     cursor: pointer;
 }
 
+header button svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--vista-blue);
+}
+
 header button:hover {
     background-color: var(--transparent-green);
     transition: 0.5s;
+}
+
+header button:hover svg {
+    fill: var(--glaucous);
+    transition: 0.3s;
 }
 
 section {
@@ -219,11 +236,13 @@ section {
     width: 280px;
 }
 
-#f-tenor {
+#f-tenor,
+#f-promo-duration {
     width: 100px;
 }
 
-#f-interest {
+#f-interest,
+#f-promo-interest {
     width: 120px;
 }
 
@@ -332,6 +351,10 @@ section {
     color: var(--african-violet);
 }
 
+#chart_container {
+    max-height: 320px;
+}
+
 #chart_placeholder {
     display: block;
     margin: auto;
@@ -339,5 +362,5 @@ section {
 
 #myChart {
     display: none;
-    max-height: 320px;
+    height: 320px;
 }

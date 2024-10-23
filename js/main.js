@@ -1,8 +1,17 @@
 
-const inputs = document.querySelectorAll("#my-form input");
+const requiredInputs = document.querySelectorAll("#my-form input[required]");
 document.querySelector("#my-form input[type=button]").addEventListener("click", () => {
-    inputs.forEach(input => {
+    requiredInputs.forEach(input => {
         if (input.value.trim() === "" || input.value === "0") {
+            input.classList.add("input-error");
+        }
+    })
+})
+
+const promoInputs = document.querySelectorAll("#f-promo-interest, #f-promo-duration");
+document.querySelector("#my-form input[type=button]").addEventListener("click", () => {
+    promoInputs.forEach(input => {
+        if (input.value.trim() === "0" || input.value.trim() === "0.0") {
             input.classList.add("input-error");
         }
     })
@@ -67,6 +76,8 @@ function calculate() {
         const total2Element = document.getElementById('f-total2');
         const firstMonthElement = document.getElementById('f-first-month');
         const lastMonthElement = document.getElementById('f-last-month');
+        const promoInterestElement = document.getElementById('f-promo-interest');
+        const promoDurationElement = document.getElementById('f-promo-duration');
 
         if (!amountElement || !interestElement || !tenorElement || !total1Element || !monthlyElement || !total2Element || !firstMonthElement || !lastMonthElement) {
             throw new Error("Missing form elements");
@@ -75,6 +86,8 @@ function calculate() {
         const amount = Number(amountElement.value.replace(/,/g, ''));
         const interest = Number(interestElement.value);
         const tenor = Number(tenorElement.value);
+        const promoInterest = Number(promoInterestElement.value);
+        const promoDuration = Number(promoDurationElement.value);
 
         if (isNaN(amount) || isNaN(interest) || isNaN(tenor)) {
             throw new Error("Invalid input values");
@@ -92,9 +105,20 @@ function calculate() {
             throw new Error("Tenor must be greater than 0");
         }
 
+        if (promoInterestElement.value !== '' && promoInterest <= 0) {
+            throw new Error("Promotion interest rate must be greater than 0");
+        }
+
+        if (promoDurationElement.value !== '' && promoDuration <= 0) {
+            throw new Error("Promotion duration must be greater than 0");
+        }
+
         // Payment cố định theo số nợ ban đầu
         let interest_rate = interest / 1200;
+        let promo_interest_rate = promoInterest / 1200;
+
         let monthly_payment = amount * Math.pow(1.0 + interest_rate, tenor) * interest_rate / (Math.pow(1.0 + interest_rate, tenor) - 1.0);
+        let monthly_promo_payment = amount * Math.pow(1.0 + interest_rate, tenor) * promo_interest_rate / (Math.pow(1.0 + promo_interest_rate, tenor) - 1.0);
         let rounded_monthly = Math.round(monthly_payment) || 0;
         monthlyElement.value = rounded_monthly.toLocaleString('en');
         let total = monthly_payment * tenor;
@@ -106,7 +130,8 @@ function calculate() {
         let total_decreasing = 0;
         let outstanding_balance = amount;
         for (let i = 0; i < tenor; i++) {
-            let payment_decreasing = amount / tenor + outstanding_balance * interest / 1200;
+            let interest_rate_used = promoDuration == 0 || i >= promoDuration ? interest_rate : promoInterest / 1200;
+            let payment_decreasing = amount / tenor + outstanding_balance * interest_rate_used;
             total_decreasing += payment_decreasing;
             outstanding_balance -= payment_decreasing;
             if (i == 0) {
@@ -138,7 +163,8 @@ function calculate() {
 
         let outstanding_balance2 = amount;
         for (let i = 0; i < tenor; i++) {
-            let payment_decreasing = amount / tenor + outstanding_balance2 * interest / 1200;
+            let interest_rate_used = promoDuration == 0 || i >= promoDuration ? interest_rate : promoInterest / 1200;
+            let payment_decreasing = amount / tenor + outstanding_balance2 * interest_rate_used;
             let rounded_payment_decreasing = Math.round(payment_decreasing) || 0;
             data2.push(rounded_payment_decreasing);
             outstanding_balance2 -= payment_decreasing;
@@ -179,7 +205,9 @@ function calculate() {
                             text: 'Thời gian (tháng thứ n)',
                         }
                     }
-                }
+                },
+                responsive: true,
+                maintainAspectRatio: false,
             },
             plugins: [{
                 id: 'removePlaceholder',
