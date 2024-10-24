@@ -78,6 +78,7 @@ function calculate() {
         const lastMonthElement = document.getElementById('f-last-month');
         const promoInterestElement = document.getElementById('f-promo-interest');
         const promoDurationElement = document.getElementById('f-promo-duration');
+        const promoMonthlyElement = document.getElementById('f-promo-monthly');
 
         if (!amountElement || !interestElement || !tenorElement || !total1Element || !monthlyElement || !total2Element || !firstMonthElement || !lastMonthElement) {
             throw new Error("Missing form elements");
@@ -118,10 +119,18 @@ function calculate() {
         let promo_interest_rate = promoInterest / 1200;
 
         let monthly_payment = amount * Math.pow(1.0 + interest_rate, tenor) * interest_rate / (Math.pow(1.0 + interest_rate, tenor) - 1.0);
-        let monthly_promo_payment = amount * Math.pow(1.0 + interest_rate, tenor) * promo_interest_rate / (Math.pow(1.0 + promo_interest_rate, tenor) - 1.0);
+        let monthly_promo_payment = amount * Math.pow(1.0 + promo_interest_rate, tenor) * promo_interest_rate / (Math.pow(1.0 + promo_interest_rate, tenor) - 1.0);
         let rounded_monthly = Math.round(monthly_payment) || 0;
         monthlyElement.value = rounded_monthly.toLocaleString('en');
-        let total = monthly_payment * tenor;
+        let rounded_promo_monthly = Math.round(monthly_promo_payment) || 0;
+        promoMonthlyElement.value = rounded_promo_monthly.toLocaleString('en');
+        let total = 0;
+        let remaining_tenor = tenor;
+        if (promoInterest !== 0 && promoDuration !== 0 && promoDuration < tenor) {
+            total += monthly_promo_payment * promoDuration;
+            remaining_tenor -= promoDuration;
+        }
+        total += monthly_payment * remaining_tenor;
 
         let rounded_total = Math.round(total) || 0;
         total1Element.value = rounded_total.toLocaleString('en');
@@ -130,7 +139,7 @@ function calculate() {
         let total_decreasing = 0;
         let outstanding_balance = amount;
         for (let i = 0; i < tenor; i++) {
-            let interest_rate_used = promoDuration == 0 || i >= promoDuration ? interest_rate : promoInterest / 1200;
+            let interest_rate_used = (promoInterest === 0 || promoDuration === 0 || i >= promoDuration) ? interest_rate : promoInterest / 1200;
             let payment_decreasing = amount / tenor + outstanding_balance * interest_rate_used;
             total_decreasing += payment_decreasing;
             outstanding_balance -= payment_decreasing;
@@ -158,12 +167,19 @@ function calculate() {
 
         // chart
         const ctx = document.getElementById('myChart').getContext('2d');
-        let data1 = Array(tenor).fill(Math.round(monthly_payment) || 0);
+        let data1 = Array(tenor).fill(0).map((_, i) => {
+            if (promoInterest !== 0) {
+                return i < promoDuration ? Math.round(monthly_promo_payment) || 0 : Math.round(monthly_payment) || 0;
+            }
+            else {
+                return Math.round(monthly_payment) || 0;
+            }
+        });
         let data2 = [];
 
         let outstanding_balance2 = amount;
         for (let i = 0; i < tenor; i++) {
-            let interest_rate_used = promoDuration == 0 || i >= promoDuration ? interest_rate : promoInterest / 1200;
+            let interest_rate_used = (promoInterest === 0 || promoDuration === 0 || i >= promoDuration) ? interest_rate : promoInterest / 1200;
             let payment_decreasing = amount / tenor + outstanding_balance2 * interest_rate_used;
             let rounded_payment_decreasing = Math.round(payment_decreasing) || 0;
             data2.push(rounded_payment_decreasing);
