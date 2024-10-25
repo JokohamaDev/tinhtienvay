@@ -368,8 +368,56 @@ section {
     height: 320px;
 }
 
-@media (max-width: 768px) {
+br.responsive {
+    display: none;
+}
+
+@media (max-width: 1300px) {
+
+    #my-form,
+    #my-form p input,
+    #my-result,
+    .row-group input {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 800px) {
     .container {
         flex-direction: column;
     }
+
+    br.responsive {
+        display: block;
+        height: 8px;
+        content: '';
+    }
+}
+
+@media (max-width: 500px) {
+
+    #my-form p input,
+    .row-group input {
+        font-size: 18px;
+    }
+
+    #my-form,
+    #my-result {
+        font-size: 18px;
+    }
+
+    #f-amount {
+        width: 160px;
+    }
+
+    #f-tenor,
+    #f-promo-duration {
+        width: 60px;
+    }
+
+    #f-interest,
+    #f-promo-interest {
+        width: 60px;
+    }
+
 }

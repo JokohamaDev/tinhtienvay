@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@100..900&display=swap" rel="stylesheet">
@@ -48,9 +48,11 @@
         <p>Tôi dự định vay</p>
         <p>số tiền <input type="text" id="f-amount" placeholder="100,000,000" required onfocus="use_number(this)" onblur="use_text(this)"> ₫</p>
         <p>với lãi suất là <input type="text" id="f-interest" min="1" max="100" step="0.1" placeholder="7.0" required onfocus="use_number(this)" oninput="checkMaxInterest(this)" onblur="formatDecimal(this)"> %/năm
-            trong thời gian <input type="text" id="f-tenor" min="1" max="360" placeholder="12" required onfocus="use_number(this)" oninput="checkMaxTenor(this)" onblur="use_text(this)"> tháng</p>
+            <br class="responsive" />trong thời gian <input type="text" id="f-tenor" min="1" max="360" placeholder="12" required onfocus="use_number(this)" oninput="checkMaxTenor(this)" onblur="use_text(this)"> tháng
+        </p>
         <p>(nếu có) lãi suất ưu đãi <input type="text" id="f-promo-interest" min="1" max="100" step="0.1" placeholder="5.0" onfocus="use_number(this)" oninput="checkMaxInterest(this)" onblur="formatDecimal(this)"> %/năm
-            trong <input type="text" id="f-promo-duration" min="1" max="360" placeholder="6" onfocus="use_number(this)" oninput="checkMaxTenor(this)" onblur="use_text(this)"> tháng đầu tiên</p>
+            <br class="responsive" />trong <input type="text" id="f-promo-duration" min="1" max="360" placeholder="6" onfocus="use_number(this)" oninput="checkMaxTenor(this)" onblur="use_text(this)"> tháng đầu tiên
+        </p>
         <input class="button" type="button" value="Tính toán" onclick="calculate()">
     </section>
 

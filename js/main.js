@@ -142,7 +142,7 @@ function calculate() {
             let interest_rate_used = (promoInterest === 0 || promoDuration === 0 || i >= promoDuration) ? interest_rate : promoInterest / 1200;
             let payment_decreasing = amount / tenor + outstanding_balance * interest_rate_used;
             total_decreasing += payment_decreasing;
-            outstanding_balance -= payment_decreasing;
+            outstanding_balance -= amount / tenor;
             if (i == 0) {
                 let first_month_decreasing = payment_decreasing;
                 let rounded_first_month_decreasing = Math.round(first_month_decreasing) || 0;
@@ -183,7 +183,7 @@ function calculate() {
             let payment_decreasing = amount / tenor + outstanding_balance2 * interest_rate_used;
             let rounded_payment_decreasing = Math.round(payment_decreasing) || 0;
             data2.push(rounded_payment_decreasing);
-            outstanding_balance2 -= payment_decreasing;
+            outstanding_balance2 -= amount / tenor;
         }
         let chartStatus = Chart.getChart("myChart");
         if (chartStatus != undefined) {
