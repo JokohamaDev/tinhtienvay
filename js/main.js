@@ -1,3 +1,15 @@
+document.getElementById('btn_about').onclick = function () {
+    document.getElementById('overlay').style.display = 'block';
+}
+document.getElementById('close_about').onclick = function () {
+    document.getElementById('overlay').style.display = 'none';
+}
+
+window.onclick = function (event) {
+    if (event.target === document.getElementById('overlay')) {
+        document.getElementById('overlay').style.display = 'none';
+    }
+}
 
 const requiredInputs = document.querySelectorAll("#my-form input[required]");
 document.querySelector("#my-form input[type=button]").addEventListener("click", () => {
