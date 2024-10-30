@@ -12,3 +12,4 @@ Changelog:
 - `0.1.4` - 2024/10/28 | Add popup for About page, and button to show/hide it.
 - `0.2.0` - 2024/10/29 | Add styles for About page, adding QR & Paypal section. Clean the html head.
 - `0.2.1` - 2024/10/30 | Add OG meta tags.
+- `0.2.2` - 2024/10/31 | Add Gtag.
