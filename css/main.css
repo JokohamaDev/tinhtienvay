@@ -436,6 +436,13 @@ br.responsive {
     display: none;
 }
 
+#disclaimer {
+    display: none;
+    text-align: center;
+    font-size: 14px;
+    color: var(--gray);
+}
+
 /* CSS for responsive */
 
 @media (max-width: 1300px) {
@@ -479,6 +486,10 @@ br.responsive {
 
     #my-form,
     #my-result {
+        font-size: 18px;
+    }
+
+    .box h4 {
         font-size: 18px;
     }
 

@@ -242,6 +242,7 @@ function calculate() {
                 beforeRender: function (chart) {
                     document.getElementById('chart_placeholder').style.display = 'none';
                     document.getElementById('myChart').style.display = 'block';
+                    document.getElementById('disclaimer').style.display = 'block';
                 }
             }]
         });
