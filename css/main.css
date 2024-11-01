@@ -2,7 +2,7 @@
 :root {
     --white: hsla(0, 0%, 100%, 1);
     --nyanza: hsla(90, 61%, 91%, 1);
-    --vista-blue: hsla(221, 43%, 69%, 1);
+    --vista-blue: hsla(221, 42%, 69%, 1);
     --glaucous: hsla(224, 38%, 55%, 1);
     --yinmn-blue: hsla(227, 21%, 36%, 1);
     --green: hsla(150, 30%, 40%, 1);
@@ -311,6 +311,10 @@ span.label {
 #f-interest,
 #f-promo-interest {
     width: 120px;
+}
+
+.input:disabled {
+    opacity: 1;
 }
 
 .input-error {
