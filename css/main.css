@@ -313,7 +313,7 @@ span.label {
     width: 120px;
 }
 
-.input:disabled {
+input:disabled {
     opacity: 1;
 }
 
