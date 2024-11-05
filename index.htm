@@ -66,7 +66,7 @@
                 </svg>
             </button>
             <!-- <h2>Tính Tiền Vay</h2> -->
-            <p>Tính Tiền Vay | 0.2.4</p>
+            <p>Tính Tiền Vay | 0.2.5</p>
             <p><span class="label">Phát triển bởi</span><br />Thành Đỗ (Jokohama)</p>
             <p><span class="label">Với sự giúp đỡ của</span><br />Visual Studio Code | Codeium | Microsoft Copilot | Stack Overflow</span></p>
             <p><span class="label">Sản phẩm này là</span><br />Một dự án nhỏ vừa phục vụ nhu cầu tính toán cá nhân vừa học làm web 🤓 Ủng hộ tách trà miếng bánh tại đây ⬇️</span></p>
@@ -81,12 +81,12 @@
 
     <section id="my-form">
         <p>Tôi dự định vay</p>
-        <p>số tiền <input type="text" id="f-amount" placeholder="100,000,000" required onfocus="use_number(this)" onblur="use_text(this)"> ₫</p>
-        <p>với lãi suất là <input type="text" id="f-interest" min="1" max="100" step="0.1" placeholder="7.0" required onfocus="use_number(this)" oninput="checkMaxInterest(this)" onblur="formatDecimal(this)"> %/năm
-            <br class="responsive" />trong thời gian <input type="text" id="f-tenor" min="1" max="360" placeholder="12" required onfocus="use_number(this)" oninput="checkMaxTenor(this)" onblur="use_text(this)"> tháng
+        <p>số tiền <input type="number" id="f-amount" placeholder="100,000,000" step="1000" required onfocus="use_number(this)" onblur="use_text(this)"> ₫</p>
+        <p>với lãi suất là <input type="number" id="f-interest" min="0.1" max="100" step="0.1" placeholder="7.0" required onfocus="use_number(this)" oninput="checkMaxInterest(this)" onblur="formatDecimal(this)"> %/năm
+            <br class="responsive" />trong thời gian <input type="number" id="f-tenor" min="1" max="360" placeholder="12" required onfocus="use_number(this)" oninput="checkMaxTenor(this)" onblur="use_text(this)"> tháng
         </p>
-        <p>(nếu có) lãi suất ưu đãi <input type="text" id="f-promo-interest" min="1" max="100" step="0.1" placeholder="5.0" onfocus="use_number(this)" oninput="checkMaxInterest(this)" onblur="formatDecimal(this)"> %/năm
-            <br class="responsive" />trong <input type="text" id="f-promo-duration" min="1" max="360" placeholder="6" onfocus="use_number(this)" oninput="checkMaxTenor(this)" onblur="use_text(this)"> tháng đầu tiên
+        <p>(nếu có) lãi suất ưu đãi <input type="number" id="f-promo-interest" min="0.1" max="100" step="0.1" placeholder="5.0" onfocus="use_number(this)" oninput="checkMaxInterest(this)" onblur="formatDecimal(this)"> %/năm
+            <br class="responsive" />trong <input type="number" id="f-promo-duration" min="1" max="360" placeholder="6" onfocus="use_number(this)" oninput="checkMaxTenor(this)" onblur="use_text(this)"> tháng đầu tiên
         </p>
         <input class="button" type="button" value="Tính toán" onclick="calculate()">
     </section>

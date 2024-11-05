@@ -15,3 +15,4 @@ Changelog:
 - `0.2.2` - 2024/10/30 | Add Gtag.
 - `0.2.3` - 2024/10/31 | Add disclaimer, fix some styling.
 - `0.2.4` - 2024/11/01 | Fix the result became transparency in Safari iOS.
+- `0.2.5` - 2024/11/05 | Optimize input type="number" to hide spinner at first.
